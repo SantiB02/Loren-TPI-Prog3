@@ -1,9 +1,21 @@
-﻿namespace Loren_TPI_Prog3.Data.Entities
+﻿using Loren_TPI_Prog3.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Loren_TPI_Prog3.Data.Entities
 {
     public class SaleOrder
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public ICollection<Product> ProductsOrdered { get; set; } = new List<Product>();
-        public pay
+        public Guid OrderCode {  get; set; }
+        public ICollection<SaleOrderProduct> ProductsOrdered { get; set; } = new List<SaleOrderProduct>();
+        public PaymentMethodEnum PaymentMethod {  get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        [ForeignKey("ClientId")]
+        public Client Client { get; set; }
+        public int ClientId { get; set; }
     }
 }

@@ -1,6 +1,13 @@
-﻿using Loren_TPI_Prog3.Data.Models;
+﻿using ErrorOr;
+using Loren_TPI_Prog3.Data.Entities;
+using Loren_TPI_Prog3.Data.Models;
+using Loren_TPI_Prog3.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Loren_TPI_Prog3.Controllers
 {
@@ -21,7 +28,41 @@ namespace Loren_TPI_Prog3.Controllers
         public IActionResult Authenticate([FromBody] CredentialsDto credentialsDto)
         {
             //valido usuario
-            BaseResponse validarUsuarioResult = _userService.ValidarUsuario(credentialsDto.Email, credentialsDto.Password);
+            BaseResponse validateUserResult = _userService.ValidateUser(credentialsDto.Email, credentialsDto.Password);
+            if (validateUserResult.Message == "wrong email")
+            {
+                return BadRequest(validateUserResult.Message);
+            } else if (validateUserResult.Message == "wrong password")
+            {
+                return Unauthorized();
+            }
+            if (validateUserResult.Result)
+            {
+                //generación del token
+                User user = _userService.GetUserByEmail(credentialsDto.Email);
+                //crear el token
+                var securityPassword = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config["Authentication:SecretForKey"])); //traemos la SecretKey del Json
+
+                var signature = new SigningCredentials(securityPassword, SecurityAlgorithms.HmacSha256);
+
+                //Los claims son datos en clave->valor que nos permiten guardar data del usuario.
+                var claimsForToken = new List<Claim>();
+                claimsForToken.Add(new Claim("sub", user.Id.ToString())); //sub es una key estándar (unique user identifier)
+                claimsForToken.Add(new Claim("email", user.Email));
+                claimsForToken.Add(new Claim("role", user.UserType)); //puede ser Client, Admin o SuperAdmin
+
+                var jwtSecurityToken = new JwtSecurityToken(
+                    _config["Authentication:Issuer"],
+                    _config["Authentication:Audience"],
+                    claimsForToken,
+                    DateTime.UtcNow,
+                    DateTime.UtcNow.AddHours(1),
+                    signature);
+
+                string tokenToReturn = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+                return Ok(tokenToReturn);
+            }
+            return BadRequest();
         }
     }
 }

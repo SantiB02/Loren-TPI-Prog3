@@ -14,7 +14,7 @@ namespace Loren_TPI_Prog3.Data.Entities
         public string Email { get; set; }
         [Required]
         public string UserName { get; set; }
-        public string UserType { get; set; } = "Client";
+        public string UserType { get; set; } = "client";
         public bool State { get; set; } = true;
     }
 }
