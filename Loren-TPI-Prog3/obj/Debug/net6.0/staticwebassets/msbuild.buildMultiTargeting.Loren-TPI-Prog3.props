@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Loren-TPI-Prog3.props" />
+</Project>

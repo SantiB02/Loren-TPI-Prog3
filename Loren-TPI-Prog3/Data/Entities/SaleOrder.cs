@@ -10,7 +10,7 @@ namespace Loren_TPI_Prog3.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public Guid OrderCode {  get; set; }
-        public ICollection<SaleOrderProduct> ProductsOrdered { get; set; } = new List<SaleOrderProduct>();
+        public ICollection<SaleOrderLine> SaleOrderLines { get; set; } = new List<SaleOrderLine>();
         public PaymentMethodEnum PaymentMethod {  get; set; }
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }

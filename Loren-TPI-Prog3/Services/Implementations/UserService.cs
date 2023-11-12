@@ -2,10 +2,11 @@
 using Loren_TPI_Prog3.Data;
 using Loren_TPI_Prog3.Data.Entities;
 using Loren_TPI_Prog3.Data.Models;
+using Loren_TPI_Prog3.Services.Interfaces;
 
 namespace Loren_TPI_Prog3.Services.Implementations
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly LorenContext _context;
 

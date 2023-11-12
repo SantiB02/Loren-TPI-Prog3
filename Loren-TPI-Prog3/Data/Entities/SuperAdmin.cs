@@ -1,7 +1,7 @@
 ﻿namespace Loren_TPI_Prog3.Data.Entities
 {
-    public class SuperAdmin : Admin
+    public class SuperAdmin : User //puede modificar productos y usuarios
     {
-        public ICollection<User> ModifiedUsers { get; set; } = new List<User>();
+        
     }
 }
