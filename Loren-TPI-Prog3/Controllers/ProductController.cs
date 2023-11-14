@@ -5,6 +5,7 @@ using Loren_TPI_Prog3.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Loren_TPI_Prog3.Controllers
 {
@@ -29,13 +30,12 @@ namespace Loren_TPI_Prog3.Controllers
             return Ok(_productService.GetProduct(id));
         }
 
-        [HttpPost]
         [Authorize]
-
+        [HttpPost]
         public IActionResult CreateProduct(ProductCreateDto productCreateDto)
 
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == "Role").Value.ToString();
+            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
             if (role == "Admin" || role == "SuperAdmin")
             {
                 Product productCreate = new Product()
@@ -48,17 +48,17 @@ namespace Loren_TPI_Prog3.Controllers
                     LastModifiedDate = DateTime.Now,
                     Code = Guid.NewGuid(),
                 };
-                
-                return Ok(_productService.CreateProduct(productCreate));
+                _productService.CreateProduct(productCreate);
+                return Ok(productCreate.Code);
             }
             return Forbid();
         }
-        [HttpPut]
-        [Authorize]
 
+        [Authorize]
+        [HttpPut]
         public IActionResult UpdateProduct(ProductUpdateDto product)
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == "Role").Value.ToString();
+            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
             if (role == "Admin" || role == "SuperAdmin")
             {
 
@@ -80,6 +80,8 @@ namespace Loren_TPI_Prog3.Controllers
 
             return Forbid();
         }
+
+        //FALTA ENDPOINT DELETEPRODUCT
 
     }
 }

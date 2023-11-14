@@ -1,4 +1,5 @@
 using Loren_TPI_Prog3.Data;
+using Loren_TPI_Prog3.Enums;
 using Loren_TPI_Prog3.Services.Implementations;
 using Loren_TPI_Prog3.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -71,6 +72,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

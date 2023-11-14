@@ -9,6 +9,6 @@ namespace Loren_TPI_Prog3.Services.Interfaces
         ErrorOr<Product> GetProduct(Guid id);
         ErrorOr<Updated> UpdateProduct(Product product, Guid code);
         ErrorOr<Deleted> DeleteProduct(Guid id);
-        ErrorOr<IEnumerable<Product>> GetProducts();
+        ErrorOr<List<Product>> GetProducts();
     }
 }

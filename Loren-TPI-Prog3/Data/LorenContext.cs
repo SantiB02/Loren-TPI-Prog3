@@ -218,7 +218,7 @@ namespace Loren_TPI_Prog3.Data
             //relación uno (producto) a muchos (variantes de producto)
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.Variants)
-                .WithOne(pv => pv.Product)
+                .WithOne()
                 .HasForeignKey(pv => pv.ProductId);
         }
     }

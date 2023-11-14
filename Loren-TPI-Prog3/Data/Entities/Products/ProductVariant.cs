@@ -9,7 +9,6 @@ namespace Loren_TPI_Prog3.Data.Entities.Products
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }
         public int ProductId { get; set; }
         [ForeignKey("ColorId")]
         public Color Color { get; set; }

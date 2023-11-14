@@ -21,12 +21,11 @@ namespace Loren_TPI_Prog3.Services.Implementations
             _context.Add(product);
             _context.SaveChanges();
             return Result.Created;
-
         }
 
         public ErrorOr<Deleted> DeleteProduct(Guid id)
         {
-            Product productToDelete = _context.Products.FirstOrDefault(p => p.Code == id);
+            Product? productToDelete = _context.Products.FirstOrDefault(p => p.Code == id);
             if (productToDelete == null)
             {
                 return Errors.Product.NotFound;
@@ -37,14 +36,14 @@ namespace Loren_TPI_Prog3.Services.Implementations
             return Result.Deleted;
         }
 
-        public ErrorOr<IEnumerable<Product>> GetProducts()
+        public ErrorOr<List<Product>> GetProducts()
         {
             return _context.Products.Where(p => p.State == true).ToList();
         }
 
         public ErrorOr<Product> GetProduct(Guid id)
         {
-            Product product = _context.Products.SingleOrDefault(p => p.Code == id);
+            Product? product = _context.Products.SingleOrDefault(p => p.Code == id);
             if (product != null)
             {
                 return product;
@@ -57,7 +56,7 @@ namespace Loren_TPI_Prog3.Services.Implementations
             if (_context.Products.SingleOrDefault(p => p.Code == code) != null)
             {
                 _context.Products.Update(product);
-
+                _context.SaveChanges();
                 return Result.Updated;
             }
             return Errors.Product.NotFound;

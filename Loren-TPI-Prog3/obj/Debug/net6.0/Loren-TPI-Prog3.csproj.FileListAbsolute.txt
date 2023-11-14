@@ -173,3 +173,6 @@ H:\Projects\Uni\LoremFinal\Loren-TPI-Prog3\Loren-TPI-Prog3\obj\Debug\net6.0\ref\
 H:\Projects\Uni\LoremFinal\Loren-TPI-Prog3\Loren-TPI-Prog3\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 H:\Projects\Uni\LoremFinal\Loren-TPI-Prog3\Loren-TPI-Prog3\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
 H:\Projects\Uni\LoremFinal\Loren-TPI-Prog3\Loren-TPI-Prog3\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\UTN\Tecnicatura en Programación\Cuatrimestre 3\Programación III\Trabajo Práctico Integrador\Loren-TPI-Prog3\Loren-TPI-Prog3\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\UTN\Tecnicatura en Programación\Cuatrimestre 3\Programación III\Trabajo Práctico Integrador\Loren-TPI-Prog3\Loren-TPI-Prog3\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\UTN\Tecnicatura en Programación\Cuatrimestre 3\Programación III\Trabajo Práctico Integrador\Loren-TPI-Prog3\Loren-TPI-Prog3\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
