@@ -42,12 +42,15 @@ namespace Loren_TPI_Prog3.Controllers
                 {
                     Name = productCreateDto.Name,
                     Description = productCreateDto.Description,
-                    Variants = productCreateDto.Variants,
+                    Variants = productCreateDto.VariantsDto.Select(v => new ProductVariant { Color = new Color { Name = v.ColorDto.Name, ColorCode = v.ColorDto.ColorCode } ,
+                        Size = new Size{ Name = v.SizeDto.Name, SizeCode = v.SizeDto.SizeCode }}).ToList(),
                     Price = productCreateDto.Price,
                     CreationDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
                     Code = Guid.NewGuid(),
+                    
                 };
+                
                 _productService.CreateProduct(productCreate);
                 return Ok(productCreate.Code);
             }

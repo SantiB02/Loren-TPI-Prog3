@@ -3,6 +3,7 @@ using System;
 using Loren_TPI_Prog3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loren_TPI_Prog3.Migrations
 {
     [DbContext(typeof(LorenContext))]
-    partial class LorenContextModelSnapshot : ModelSnapshot
+    [Migration("20231114144928_SizeColorChanges")]
+    partial class SizeColorChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -92,10 +95,10 @@ namespace Loren_TPI_Prog3.Migrations
                         new
                         {
                             Id = 1,
-                            Code = new Guid("a6aa104c-f10a-45f1-9ce2-9e8b7d11a810"),
+                            Code = new Guid("27bb2cdb-8ad5-4d9b-8348-a96456a4e527"),
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Corpiño push-up de suave textura y excelente calidad",
-                            LastModifiedDate = new DateTime(2023, 11, 14, 12, 18, 34, 920, DateTimeKind.Local).AddTicks(3517),
+                            LastModifiedDate = new DateTime(2023, 11, 14, 11, 49, 27, 913, DateTimeKind.Local).AddTicks(8282),
                             Name = "Corpiño",
                             Price = 5000.34m,
                             State = true
@@ -103,10 +106,10 @@ namespace Loren_TPI_Prog3.Migrations
                         new
                         {
                             Id = 2,
-                            Code = new Guid("537889eb-4747-4b1e-8342-fb72ad5073c8"),
+                            Code = new Guid("dadcf011-d66d-40fd-96ed-0eab4e072049"),
                             CreationDate = new DateTime(2023, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Malla de algodón",
-                            LastModifiedDate = new DateTime(2023, 11, 14, 12, 18, 34, 920, DateTimeKind.Local).AddTicks(3587),
+                            LastModifiedDate = new DateTime(2023, 11, 14, 11, 49, 27, 913, DateTimeKind.Local).AddTicks(8444),
                             Name = "Malla",
                             Price = 5000.34m,
                             State = true
@@ -114,10 +117,10 @@ namespace Loren_TPI_Prog3.Migrations
                         new
                         {
                             Id = 3,
-                            Code = new Guid("f55ff686-73e5-44b3-a4ff-affe8793d4d1"),
+                            Code = new Guid("288fbb32-6206-4b01-a7de-2a971004aae1"),
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Camisón de seda confeccionado con un material suave y lujoso",
-                            LastModifiedDate = new DateTime(2023, 11, 14, 12, 18, 34, 920, DateTimeKind.Local).AddTicks(3590),
+                            LastModifiedDate = new DateTime(2023, 11, 14, 11, 49, 27, 913, DateTimeKind.Local).AddTicks(8448),
                             Name = "Camisón",
                             Price = 5000.34m,
                             State = true
@@ -249,7 +252,7 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 1,
                             ClientId = 1,
-                            OrderCode = new Guid("eef95c60-c0e9-41ad-a3f3-37692203f8d2"),
+                            OrderCode = new Guid("e144963e-2797-4693-a13e-352a5e823333"),
                             OrderDate = new DateTime(2023, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 0,
                             TotalPrice = 15000.34m
@@ -258,7 +261,7 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 2,
                             ClientId = 1,
-                            OrderCode = new Guid("5ec84537-14e0-450b-9463-0b505dbad8b4"),
+                            OrderCode = new Guid("58c5d47b-25a5-4000-a046-d0c20f648dd7"),
                             OrderDate = new DateTime(2023, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 1,
                             TotalPrice = 38000.95m

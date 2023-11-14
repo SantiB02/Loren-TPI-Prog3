@@ -6,7 +6,7 @@ namespace Loren_TPI_Prog3.Data.Models
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public ICollection<ProductVariant> Variants { get; set; }
+        public ICollection<ProductVariantCreateDto> VariantsDto { get; set; }
         public decimal Price { get; set; }
     }
 }

@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Controllers",
+    "\\Data",
+    "\\Data\\Entities",
+    "\\Data\\Entities\\Products",
+    "\\Data\\Models",
+    "\\Enums",
+    "\\Services",
+    "\\Services\\Implementations"
+  ],
+  "SelectedNode": "\\Data\\LorenContext.cs",
+  "PreviewInSolutionExplorer": false
+}

@@ -158,19 +158,19 @@ namespace Loren_TPI_Prog3.Data
                 new Color
                 {
                     Id = 1,
-                    ColorId = 34,
+                    ColorCode = 34,
                     Name = "Negro"
                 },
                 new Color
                 {
                     Id = 2,
-                    ColorId = 65,
+                    ColorCode = 65,
                     Name = "Blanco"
                 },
                 new Color
                 {
                     Id = 3,
-                    ColorId = 28,
+                    ColorCode = 28,
                     Name = "Rojo"
                 }
                 );
@@ -180,19 +180,19 @@ namespace Loren_TPI_Prog3.Data
                 new Size
                 {
                     Id = 1,
-                    SizeId = 23,
+                    SizeCode = 23,
                     Name = "S"
                 },
                 new Size
                 {
                     Id = 2,
-                    SizeId = 75,
+                    SizeCode = 75,
                     Name = "M"
                 },
                 new Size
                 {
                     Id = 3,
-                    SizeId = 12,
+                    SizeCode = 12,
                     Name = "L"
                 }
                 );

@@ -8,7 +8,7 @@ namespace Loren_TPI_Prog3.Data.Entities.Products
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int SizeId { get; set; }
+        public int SizeCode { get; set; }
         public string Name { get; set; }
     }
 }
