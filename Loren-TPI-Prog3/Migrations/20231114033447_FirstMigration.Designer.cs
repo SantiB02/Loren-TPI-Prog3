@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loren_TPI_Prog3.Migrations
 {
     [DbContext(typeof(LorenContext))]
-    [Migration("20231104083300_initial-migration")]
-    partial class initialmigration
+    [Migration("20231114033447_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,6 +84,9 @@ namespace Loren_TPI_Prog3.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("State")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -92,32 +95,35 @@ namespace Loren_TPI_Prog3.Migrations
                         new
                         {
                             Id = 1,
-                            Code = new Guid("4c3d7fe4-33b9-45cf-9990-23e5fca4260c"),
+                            Code = new Guid("d3919bcc-a4cf-4eb8-b537-2c2a569576ad"),
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Corpiño push-up de suave textura y excelente calidad",
-                            LastModifiedDate = new DateTime(2023, 11, 4, 5, 33, 0, 590, DateTimeKind.Local).AddTicks(60),
+                            LastModifiedDate = new DateTime(2023, 11, 14, 0, 34, 47, 136, DateTimeKind.Local).AddTicks(7879),
                             Name = "Corpiño",
-                            Price = 5000.34m
+                            Price = 5000.34m,
+                            State = true
                         },
                         new
                         {
                             Id = 2,
-                            Code = new Guid("62d8915c-f3fa-4884-83ba-eb8697b91b4f"),
+                            Code = new Guid("665dcbfa-88b6-4ef7-baa5-ba3e0584b095"),
                             CreationDate = new DateTime(2023, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Malla de algodón",
-                            LastModifiedDate = new DateTime(2023, 11, 4, 5, 33, 0, 590, DateTimeKind.Local).AddTicks(101),
+                            LastModifiedDate = new DateTime(2023, 11, 14, 0, 34, 47, 136, DateTimeKind.Local).AddTicks(7958),
                             Name = "Malla",
-                            Price = 5000.34m
+                            Price = 5000.34m,
+                            State = true
                         },
                         new
                         {
                             Id = 3,
-                            Code = new Guid("463b9075-6f5e-489b-ab3f-97f74b8359b1"),
+                            Code = new Guid("fc499a24-0f99-486e-86aa-293b82cd0518"),
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Camisón de seda confeccionado con un material suave y lujoso",
-                            LastModifiedDate = new DateTime(2023, 11, 4, 5, 33, 0, 590, DateTimeKind.Local).AddTicks(104),
+                            LastModifiedDate = new DateTime(2023, 11, 14, 0, 34, 47, 136, DateTimeKind.Local).AddTicks(7961),
                             Name = "Camisón",
-                            Price = 5000.34m
+                            Price = 5000.34m,
+                            State = true
                         });
                 });
 
@@ -246,7 +252,7 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 1,
                             ClientId = 1,
-                            OrderCode = new Guid("2e77d4d5-41aa-457e-9347-e73b6388e296"),
+                            OrderCode = new Guid("c919d149-e37e-488d-a6d4-dee164229102"),
                             OrderDate = new DateTime(2023, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 0,
                             TotalPrice = 15000.34m
@@ -255,7 +261,7 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 2,
                             ClientId = 1,
-                            OrderCode = new Guid("eb6f6a6f-f585-4720-ae74-122ef0120367"),
+                            OrderCode = new Guid("3c843d48-795a-4de0-a4a9-3891fcffe99d"),
                             OrderDate = new DateTime(2023, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 1,
                             TotalPrice = 38000.95m
@@ -287,6 +293,16 @@ namespace Loren_TPI_Prog3.Migrations
                     b.HasIndex("SaleOrderId");
 
                     b.ToTable("SaleOrderLine");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProductId = 1,
+                            QuantityOrdered = 2,
+                            SaleOrderId = 2,
+                            Total = 0m
+                        });
                 });
 
             modelBuilder.Entity("Loren_TPI_Prog3.Data.Entities.User", b =>

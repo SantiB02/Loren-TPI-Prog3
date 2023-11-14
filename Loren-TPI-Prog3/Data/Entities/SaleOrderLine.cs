@@ -13,7 +13,7 @@ namespace Loren_TPI_Prog3.Data.Entities
         public Product Product { get; set; }
         public int ProductId { get; set; }
         public int QuantityOrdered { get; set; }
-        public decimal Total { get {return Product.Price * QuantityOrdered;} }
+        public decimal Total { get; set; } = 0;
         [ForeignKey("SaleOrderId")]
         public SaleOrder SaleOrder { get; set; }
         public int SaleOrderId { get; set; }

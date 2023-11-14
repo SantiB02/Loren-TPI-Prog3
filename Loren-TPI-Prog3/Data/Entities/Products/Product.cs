@@ -23,7 +23,9 @@ namespace Loren_TPI_Prog3.Data.Entities.Products
         public ICollection<ProductVariant> Variants { get; set; }
         //public int Stock { get; set; } = 0; //si no se especifica, el stock por defecto es 0
         public decimal Price { get; set; }
+        public bool State { get; set; } = true; //si no se especifica, el estado por defecto es true (activo)
         public Product() { } //constructor con 0 argumentos para permitir instanciar productos en el context
+
 
         private Product(
             Guid code,
@@ -33,7 +35,8 @@ namespace Loren_TPI_Prog3.Data.Entities.Products
             DateTime lastModifiedDate,
             List<string> color,
             List<string> size
-        )
+,
+            bool state)
         {
             Code = code;
             Name = name;
@@ -51,7 +54,8 @@ namespace Loren_TPI_Prog3.Data.Entities.Products
             DateTime startDateTime,
             List<string> color,
             List<string> size,
-            Guid? id = null
+            Guid? id = null,
+            bool state = true //si no se especifica, el estado por defecto es true (activo)
         )
         {
             List<Error> errors = new();
@@ -75,7 +79,8 @@ namespace Loren_TPI_Prog3.Data.Entities.Products
             startDateTime,
             DateTime.UtcNow,
             color,
-            size
+            size,
+            state
         );
         }
 

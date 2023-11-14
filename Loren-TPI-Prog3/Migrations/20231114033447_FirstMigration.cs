@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Loren_TPI_Prog3.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,7 +38,8 @@ namespace Loren_TPI_Prog3.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     LastModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false)
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    State = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -176,12 +177,12 @@ namespace Loren_TPI_Prog3.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Code", "CreationDate", "Description", "LastModifiedDate", "Name", "Price" },
+                columns: new[] { "Id", "Code", "CreationDate", "Description", "LastModifiedDate", "Name", "Price", "State" },
                 values: new object[,]
                 {
-                    { 1, new Guid("4c3d7fe4-33b9-45cf-9990-23e5fca4260c"), new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Corpiño push-up de suave textura y excelente calidad", new DateTime(2023, 11, 4, 5, 33, 0, 590, DateTimeKind.Local).AddTicks(60), "Corpiño", 5000.34m },
-                    { 2, new Guid("62d8915c-f3fa-4884-83ba-eb8697b91b4f"), new DateTime(2023, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "Malla de algodón", new DateTime(2023, 11, 4, 5, 33, 0, 590, DateTimeKind.Local).AddTicks(101), "Malla", 5000.34m },
-                    { 3, new Guid("463b9075-6f5e-489b-ab3f-97f74b8359b1"), new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Camisón de seda confeccionado con un material suave y lujoso", new DateTime(2023, 11, 4, 5, 33, 0, 590, DateTimeKind.Local).AddTicks(104), "Camisón", 5000.34m }
+                    { 1, new Guid("d3919bcc-a4cf-4eb8-b537-2c2a569576ad"), new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Corpiño push-up de suave textura y excelente calidad", new DateTime(2023, 11, 14, 0, 34, 47, 136, DateTimeKind.Local).AddTicks(7879), "Corpiño", 5000.34m, true },
+                    { 2, new Guid("665dcbfa-88b6-4ef7-baa5-ba3e0584b095"), new DateTime(2023, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "Malla de algodón", new DateTime(2023, 11, 14, 0, 34, 47, 136, DateTimeKind.Local).AddTicks(7958), "Malla", 5000.34m, true },
+                    { 3, new Guid("fc499a24-0f99-486e-86aa-293b82cd0518"), new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Camisón de seda confeccionado con un material suave y lujoso", new DateTime(2023, 11, 14, 0, 34, 47, 136, DateTimeKind.Local).AddTicks(7961), "Camisón", 5000.34m, true }
                 });
 
             migrationBuilder.InsertData(
@@ -223,9 +224,14 @@ namespace Loren_TPI_Prog3.Migrations
                 columns: new[] { "Id", "ClientId", "OrderCode", "OrderDate", "PaymentMethod", "TotalPrice" },
                 values: new object[,]
                 {
-                    { 1, 1, new Guid("2e77d4d5-41aa-457e-9347-e73b6388e296"), new DateTime(2023, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 15000.34m },
-                    { 2, 1, new Guid("eb6f6a6f-f585-4720-ae74-122ef0120367"), new DateTime(2023, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 38000.95m }
+                    { 1, 1, new Guid("c919d149-e37e-488d-a6d4-dee164229102"), new DateTime(2023, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 15000.34m },
+                    { 2, 1, new Guid("3c843d48-795a-4de0-a4a9-3891fcffe99d"), new DateTime(2023, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 38000.95m }
                 });
+
+            migrationBuilder.InsertData(
+                table: "SaleOrderLine",
+                columns: new[] { "Id", "ProductId", "QuantityOrdered", "SaleOrderId", "Total" },
+                values: new object[] { 1, 1, 2, 2, 0m });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductVariants_ColorId",
