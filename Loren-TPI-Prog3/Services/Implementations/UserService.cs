@@ -65,5 +65,10 @@ namespace Loren_TPI_Prog3.Services.Implementations
             _context.SaveChanges();
             return Result.Deleted;
         }
+
+        public ErrorOr<List<User>> GetUsersByRole(string role)
+        {
+            return _context.Users.Where(u => u.UserType == role).ToList();
+        }
     }
 }

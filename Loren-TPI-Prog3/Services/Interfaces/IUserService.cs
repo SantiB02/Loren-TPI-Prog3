@@ -11,5 +11,6 @@ namespace Loren_TPI_Prog3.Services.Interfaces
         public ErrorOr<int> CreateUser(User user);
         public ErrorOr<Updated> UpdateUser(User user);
         public ErrorOr<Deleted> DeleteUser(int userId);
+        public ErrorOr<List<User>> GetUsersByRole(string role);
     }
 }

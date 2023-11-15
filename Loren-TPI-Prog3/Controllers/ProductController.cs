@@ -32,7 +32,7 @@ namespace Loren_TPI_Prog3.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult CreateProduct(ProductCreateDto productCreateDto)
+        public IActionResult CreateProduct([FromBody] ProductCreateDto productCreateDto)
 
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
@@ -59,7 +59,7 @@ namespace Loren_TPI_Prog3.Controllers
 
         [Authorize]
         [HttpPut]
-        public IActionResult UpdateProduct(ProductUpdateDto product)
+        public IActionResult UpdateProduct([FromBody] ProductUpdateDto product)
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
             if (role == "Admin" || role == "SuperAdmin")
