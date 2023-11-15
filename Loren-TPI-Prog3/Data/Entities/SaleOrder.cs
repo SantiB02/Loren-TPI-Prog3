@@ -17,5 +17,7 @@ namespace Loren_TPI_Prog3.Data.Entities
         [ForeignKey("ClientId")]
         public Client Client { get; set; }
         public int ClientId { get; set; }
+        public bool Completed { get; set; } = false; //si es falso está en proceso, sino está completada
+        public bool State { get; set; } = true; //para el borrado lógico. false está borrada
     }
 }

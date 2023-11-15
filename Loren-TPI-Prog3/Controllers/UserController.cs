@@ -20,29 +20,38 @@ namespace Loren_TPI_Prog3.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
-        public IActionResult CreateClient([FromBody] ClientPostDto clientPostDto)
+        [HttpGet]
+        public IActionResult GetClients()
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+            string loggedUserEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            User userLogged = _userService.GetUserByEmail(loggedUserEmail);
 
-            if (role == "Client")
+            if (role == "Admin" || role == "SuperAdmin" && userLogged.State)
             {
-                Client client = new Client()
-                {
-                    Email = clientPostDto.Email,
-                    Name = clientPostDto.Name,
-                    LastName = clientPostDto.LastName,
-                    Password = clientPostDto.Password,
-                    UserName = clientPostDto.UserName,
-                    Address = clientPostDto.Address
-                };
-                int id = _userService.CreateUser(client).Value;
-                return Ok(id);
+                return Ok(_userService.GetUsersByRole("Client").Value);
             }
             return Forbid();
         }
 
+        [AllowAnonymous]
         [HttpPost]
+        public IActionResult CreateClient([FromBody] ClientPostDto clientPostDto) //sería la registración de un nuevo cliente
+        {
+            Client client = new Client()
+            {
+                Email = clientPostDto.Email,
+                Name = clientPostDto.Name,
+                LastName = clientPostDto.LastName,
+                Password = clientPostDto.Password,
+                UserName = clientPostDto.UserName,
+                Address = clientPostDto.Address
+            };
+            int id = _userService.CreateUser(client).Value;
+            return Ok(id);
+        }
+
+        [HttpPost("admin/")]
         public IActionResult CreateAdmin([FromBody] AdminPostDto adminPostDto)
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
@@ -75,7 +84,7 @@ namespace Loren_TPI_Prog3.Controllers
                 {
                     Id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value),
                     Email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value,
-                    UserName = User.Claims.FirstOrDefault(c => c.Type.Contains("username")).Value,
+                    UserName = clientUpdateDto.UserName,
                     Name = clientUpdateDto.Name,
                     LastName = clientUpdateDto.LastName,
                     Password = clientUpdateDto.Password,
@@ -88,25 +97,11 @@ namespace Loren_TPI_Prog3.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteUser()
+        public IActionResult DeleteSelfUser() //usuario se borre a sí mismo
         {
             int id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            _userService.DeleteUser(id);
+            _userService.DeleteUser(id); //borrado lógico (el usuario seguirá en la base de datos)
             return NoContent();
-        }
-
-        [HttpGet]
-        public IActionResult GetClients()
-        {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            string loggedUserEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
-            User userLogged = _userService.GetUserByEmail(loggedUserEmail);
-
-            if (role == "Admin" || role == "SuperAdmin" && userLogged.State)
-            {
-                return Ok(_userService.GetUsersByRole("Client"));
-            }
-            return Forbid();
         }
     }
 }

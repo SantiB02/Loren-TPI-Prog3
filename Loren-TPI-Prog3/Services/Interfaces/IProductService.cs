@@ -5,10 +5,10 @@ namespace Loren_TPI_Prog3.Services.Interfaces
 {
     public interface IProductService
     {
-        ErrorOr<Created> CreateProduct(Product product);
-        ErrorOr<Product> GetProduct(Guid id);
-        ErrorOr<Updated> UpdateProduct(Product product, Guid code);
-        ErrorOr<Deleted> DeleteProduct(Guid id);
-        ErrorOr<List<Product>> GetProducts();
+        public ErrorOr<Created> CreateProduct(Product product);
+        public ErrorOr<Product> GetProduct(Guid id);
+        public ErrorOr<Updated> UpdateProduct(int productId, Product product);
+        public ErrorOr<List<Product>> GetProducts();
+        public ErrorOr<Deleted> DeleteProduct(int productId);
     }
 }

@@ -42,7 +42,8 @@ builder.Services.AddDbContext<LorenContext>(dbContextOptions => dbContextOptions
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-
+builder.Services.AddScoped<ISaleOrderService, SaleOrderService>();
+#endregion
 
 builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntenticación que tenemos que elegir después en PostMan para pasarle el token
     .AddJwtBearer(options => //Acá definimos la configuración de la autenticación. le decimos qué cosas queremos comprobar. La fecha de expiración se valida por defecto.
@@ -58,9 +59,6 @@ builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntentica
         };
     }
 );
-
-
-#endregion
 
 var app = builder.Build();
 

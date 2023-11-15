@@ -20,69 +20,71 @@ namespace Loren_TPI_Prog3.Data.Entities.Products
         public string Description { get; set; } = string.Empty;
         public DateTime CreationDate { get; set; } = DateTime.Now; //fecha por defecto la actual
         public DateTime LastModifiedDate { get; set; } = DateTime.Now; //fecha por defecto la actual
-        public ICollection<ProductVariant> Variants { get; set; }
+        public ICollection<ProductVariant> Variants { get; set; } = new List<ProductVariant>();
         //public int Stock { get; set; } = 0; //si no se especifica, el stock por defecto es 0
         public decimal Price { get; set; }
+        public decimal Discount { get; set; } = 0;
+        public string ImageLink { get; set; }
         public bool State { get; set; } = true; //si no se especifica, el estado por defecto es true (activo)
         public Product() { } //constructor con 0 argumentos para permitir instanciar productos en el context
 
 
-        private Product(
-            Guid code,
-            string name,
-            string description,
-            DateTime creationDate,
-            DateTime lastModifiedDate,
-            List<string> color,
-            List<string> size
-,
-            bool state)
-        {
-            Code = code;
-            Name = name;
-            Description = description;
-            CreationDate = creationDate;
-            LastModifiedDate = lastModifiedDate;
-            //Color = color;
-            //Size = size;
-            //Lean, revisar por qué dan error las dos asignaciones de arriba. color y size ya no son más listas, son clases separadas. Debe ser por eso.
-        }
+//        private Product(
+//            Guid code,
+//            string name,
+//            string description,
+//            DateTime creationDate,
+//            DateTime lastModifiedDate,
+//            List<string> color,
+//            List<string> size
+//,
+//            bool state)
+//        {
+//            Code = code;
+//            Name = name;
+//            Description = description;
+//            CreationDate = creationDate;
+//            LastModifiedDate = lastModifiedDate;
+//            //Color = color;
+//            //Size = size;
+//            //Lean, revisar por qué dan error las dos asignaciones de arriba. color y size ya no son más listas, son clases separadas. Debe ser por eso.
+//        }
 
-        public static ErrorOr<Product> Create(
-            string name,
-            string description,
-            DateTime startDateTime,
-            List<string> color,
-            List<string> size,
-            Guid? id = null,
-            bool state = true //si no se especifica, el estado por defecto es true (activo)
-        )
-        {
-            List<Error> errors = new();
+//        public static ErrorOr<Product> Create(
+//            string name,
+//            string description,
+//            DateTime startDateTime,
+//            List<string> color,
+//            List<string> size,
+//            Guid? id = null,
+//            bool state = true //si no se especifica, el estado por defecto es true (activo)
+//        )
+//        {
+//            List<Error> errors = new();
 
-            if (name.Length is < MinNameLength or > MaxNameLength)
-            {
-                errors.Add(Errors.Product.InvalidName);
-            }
-            if (description.Length is < MinNameLength or > MaxNameLength)
-            {
-                errors.Add(Errors.Product.InvalidDescription);
-            }
-            if (errors.Count > 0)
-            {
-                return errors;
-            }
-            return new Product(
-            id ?? Guid.NewGuid(),
-            name,
-            description,
-            startDateTime,
-            DateTime.UtcNow,
-            color,
-            size,
-            state
-        );
-        }
+//            if (name.Length is < MinNameLength or > MaxNameLength)
+//            {
+//                errors.Add(Errors.Product.InvalidName);
+//            }
+//            if (description.Length is < MinNameLength or > MaxNameLength)
+//            {
+//                errors.Add(Errors.Product.InvalidDescription);
+//            }
+//            if (errors.Count > 0)
+//            {
+//                return errors;
+//            }
+//            return new Product(
+//            id ?? Guid.NewGuid(),
+//            name,
+//            description,
+//            startDateTime,
+//            DateTime.UtcNow,
+//            color,
+//            size,
+//            state
+//        );
+//        }
 
         //public static ErrorOr<Product> From(CreateProductRequest request)
         //{

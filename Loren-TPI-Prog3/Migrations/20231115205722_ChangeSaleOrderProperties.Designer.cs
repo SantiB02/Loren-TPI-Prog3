@@ -3,6 +3,7 @@ using System;
 using Loren_TPI_Prog3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loren_TPI_Prog3.Migrations
 {
     [DbContext(typeof(LorenContext))]
-    partial class LorenContextModelSnapshot : ModelSnapshot
+    [Migration("20231115205722_ChangeSaleOrderProperties")]
+    partial class ChangeSaleOrderProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -71,13 +74,6 @@ namespace Loren_TPI_Prog3.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ImageLink")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("TEXT");
 
@@ -99,12 +95,10 @@ namespace Loren_TPI_Prog3.Migrations
                         new
                         {
                             Id = 1,
-                            Code = new Guid("7bef2d98-d02e-49af-aba6-bcd87df1938c"),
+                            Code = new Guid("27730b68-4dff-4794-8157-4060ba9f34be"),
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Corpiño push-up de suave textura y excelente calidad",
-                            Discount = 0m,
-                            ImageLink = "https://selulen.vtexassets.com/arquivos/ids/179923/SL16202_vison_1-selu-camison-raso-pijama-regulable-enagua-puntilla-estampado.jpg?v=638104325419730000",
-                            LastModifiedDate = new DateTime(2023, 11, 15, 19, 47, 41, 517, DateTimeKind.Local).AddTicks(5947),
+                            LastModifiedDate = new DateTime(2023, 11, 15, 17, 57, 22, 35, DateTimeKind.Local).AddTicks(4019),
                             Name = "Corpiño",
                             Price = 5000.34m,
                             State = true
@@ -112,12 +106,10 @@ namespace Loren_TPI_Prog3.Migrations
                         new
                         {
                             Id = 2,
-                            Code = new Guid("c7b04819-c0b1-47cf-b197-0cd3e3080ae9"),
+                            Code = new Guid("51d06564-9da9-4ce1-8ada-dde0b44443d6"),
                             CreationDate = new DateTime(2023, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Malla de algodón",
-                            Discount = 10.5m,
-                            ImageLink = "https://http2.mlstatic.com/D_NQ_NP_674011-MLA52236140541_112022-O.webp",
-                            LastModifiedDate = new DateTime(2023, 11, 15, 19, 47, 41, 517, DateTimeKind.Local).AddTicks(5989),
+                            LastModifiedDate = new DateTime(2023, 11, 15, 17, 57, 22, 35, DateTimeKind.Local).AddTicks(4066),
                             Name = "Malla",
                             Price = 5000.34m,
                             State = true
@@ -125,12 +117,10 @@ namespace Loren_TPI_Prog3.Migrations
                         new
                         {
                             Id = 3,
-                            Code = new Guid("2e055364-d547-41f7-8499-19a9fa8db522"),
+                            Code = new Guid("19e5d76f-6571-484c-86e2-820f7b01ddab"),
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Camisón de seda confeccionado con un material suave y lujoso",
-                            Discount = 0m,
-                            ImageLink = "https://http2.mlstatic.com/D_NQ_NP_692024-MLA53006038573_122022-O.webp",
-                            LastModifiedDate = new DateTime(2023, 11, 15, 19, 47, 41, 517, DateTimeKind.Local).AddTicks(5992),
+                            LastModifiedDate = new DateTime(2023, 11, 15, 17, 57, 22, 35, DateTimeKind.Local).AddTicks(4070),
                             Name = "Camisón",
                             Price = 5000.34m,
                             State = true
@@ -269,7 +259,7 @@ namespace Loren_TPI_Prog3.Migrations
                             Id = 1,
                             ClientId = 1,
                             Completed = false,
-                            OrderCode = new Guid("072d5c83-6a0b-4f2f-bf44-3f7d511aceb4"),
+                            OrderCode = new Guid("a1ba9393-cfc8-4e43-9e3f-b290e192431e"),
                             OrderDate = new DateTime(2023, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 0,
                             State = true,
@@ -280,7 +270,7 @@ namespace Loren_TPI_Prog3.Migrations
                             Id = 2,
                             ClientId = 1,
                             Completed = false,
-                            OrderCode = new Guid("4582aa3d-66a3-4bb1-9f7b-db82fc0b2bd8"),
+                            OrderCode = new Guid("0f73c644-8d63-4e12-ba12-719398267174"),
                             OrderDate = new DateTime(2023, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 1,
                             State = true,

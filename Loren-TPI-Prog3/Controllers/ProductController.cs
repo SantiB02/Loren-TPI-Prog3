@@ -1,6 +1,8 @@
 ﻿using ErrorOr;
 using Loren_TPI_Prog3.Data.Entities.Products;
 using Loren_TPI_Prog3.Data.Models;
+using Loren_TPI_Prog3.ServiceErrors;
+using Loren_TPI_Prog3.Services.Implementations;
 using Loren_TPI_Prog3.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -22,12 +24,12 @@ namespace Loren_TPI_Prog3.Controllers
         [HttpGet]
         public IActionResult GetProducts()
         {
-            return Ok(_productService.GetProducts());
+            return Ok(_productService.GetProducts().Value);
         }
         [HttpGet("{id}")]
         public IActionResult GetProductById(Guid id)
         {
-            return Ok(_productService.GetProduct(id));
+            return Ok(_productService.GetProduct(id).Value);
         }
 
         [Authorize]
@@ -42,13 +44,18 @@ namespace Loren_TPI_Prog3.Controllers
                 {
                     Name = productCreateDto.Name,
                     Description = productCreateDto.Description,
-                    Variants = productCreateDto.VariantsDto.Select(v => new ProductVariant { Color = new Color { Name = v.ColorDto.Name, ColorCode = v.ColorDto.ColorCode } ,
-                        Size = new Size{ Name = v.SizeDto.Name, SizeCode = v.SizeDto.SizeCode }}).ToList(),
+                    Variants = productCreateDto.VariantsDto.Select(v => new ProductVariant { 
+                        ColorId = v.ColorId,
+                        SizeId = v.SizeId,
+                        Stock = v.Stock
+                    }).ToList(),
+
                     Price = productCreateDto.Price,
                     CreationDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
                     Code = Guid.NewGuid(),
-                    
+                    Discount = productCreateDto.Discount,
+                    ImageLink = productCreateDto.ImageLink,
                 };
                 
                 _productService.CreateProduct(productCreate);
@@ -58,8 +65,8 @@ namespace Loren_TPI_Prog3.Controllers
         }
 
         [Authorize]
-        [HttpPut]
-        public IActionResult UpdateProduct([FromBody] ProductUpdateDto product)
+        [HttpPut("{productId}")]
+        public IActionResult UpdateProduct([FromRoute] int productId, [FromBody] ProductUpdateDto product)
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
             if (role == "Admin" || role == "SuperAdmin")
@@ -69,10 +76,13 @@ namespace Loren_TPI_Prog3.Controllers
                 {
                     Name = product.Name,
                     Description = product.Description,
-                    Price = product.Price
+                    Price = product.Price,
+                    LastModifiedDate = DateTime.Now,
+                    Discount = product.Discount,
+                    ImageLink = product.ImageLink
                 };
 
-                var updateResult = _productService.UpdateProduct(productUpdate, product.Code);
+                var updateResult = _productService.UpdateProduct(productId, productUpdate);
 
                 if (updateResult.Value == Result.Updated)
                 {
@@ -84,21 +94,28 @@ namespace Loren_TPI_Prog3.Controllers
             return Forbid();
         }
 
-        //FALTA ENDPOINT DELETEPRODUCT
-
+        [Authorize]
+        [HttpDelete]
+        public IActionResult DeleteProduct([FromBody] int productId)
+        {
+            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+            if (role == "Admin" || role == "SuperAdmin")
+            {
+                var deleteResult = _productService.DeleteProduct(productId);
+                if (deleteResult == Result.Deleted)
+                {
+                    return Ok();
+                }
+                else if (deleteResult == Errors.Product.AlreadyDeleted)
+                {
+                    return BadRequest(deleteResult.FirstError);
+                }
+                else
+                {
+                    return NotFound(deleteResult.FirstError);
+                }
+            }
+            return Forbid();
+        }
     }
 }
-
-
-        //{
-        //    Product productUpdate = new Product()
-        //    {
-        //        Code = product.Code,
-        //        Name = product.Name,
-        //        Description = product.Description,
-        //        Price = product.Price
-        //    };
-        //    return Ok(_productService.UpdateProduct(productUpdate));
-        //    };
-
-
