@@ -56,6 +56,7 @@ namespace Loren_TPI_Prog3.Controllers
                     Code = Guid.NewGuid(),
                     Discount = productCreateDto.Discount,
                     ImageLink = productCreateDto.ImageLink,
+                    Category = productCreateDto.Category
                 };
                 
                 _productService.CreateProduct(productCreate);
@@ -80,7 +81,8 @@ namespace Loren_TPI_Prog3.Controllers
                     Price = product.Price,
                     LastModifiedDate = DateTime.Now,
                     Discount = product.Discount,
-                    ImageLink = product.ImageLink
+                    ImageLink = product.ImageLink,
+                    Category = product.Category
                 };
 
                 var updateResult = _productService.UpdateProduct(productId, productUpdate);

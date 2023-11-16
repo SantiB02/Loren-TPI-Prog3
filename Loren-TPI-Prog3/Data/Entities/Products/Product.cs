@@ -25,6 +25,7 @@ namespace Loren_TPI_Prog3.Data.Entities.Products
         public decimal Price { get; set; }
         public decimal Discount { get; set; } = 0;
         public string ImageLink { get; set; }
+        public string Category {  get; set; }
         public bool State { get; set; } = true; //si no se especifica, el estado por defecto es true (activo)
         public Product() { } //constructor con 0 argumentos para permitir instanciar productos en el context
 

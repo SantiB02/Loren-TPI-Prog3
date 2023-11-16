@@ -9,5 +9,6 @@ namespace Loren_TPI_Prog3.Data.Models
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public string ImageLink { get; set; }
+        public string Category { get; set; }
     }
 }
