@@ -98,8 +98,8 @@ namespace Loren_TPI_Prog3.Controllers
         }
 
         [Authorize]
-        [HttpDelete]
-        public IActionResult DeleteProduct([FromBody] int productId)
+        [HttpDelete("{productId}")]
+        public IActionResult DeleteProduct([FromRoute] int productId)
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             if (role == "Admin" || role == "SuperAdmin")
