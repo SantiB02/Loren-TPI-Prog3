@@ -69,7 +69,7 @@ namespace Loren_TPI_Prog3.Data
                     Id = 1,
                     Name = "Corpiño",
                     Price = 5000.34M,
-                    ImageLink = "https://selulen.vtexassets.com/arquivos/ids/179923/SL16202_vison_1-selu-camison-raso-pijama-regulable-enagua-puntilla-estampado.jpg?v=638104325419730000",
+                    ImageLink = "https://http2.mlstatic.com/D_NQ_NP_692024-MLA53006038573_122022-O.webp",
                     Category = "Corpiños"
                 },
                 new Product
@@ -93,7 +93,7 @@ namespace Loren_TPI_Prog3.Data
                     Id = 3,
                     Name = "Camisón",
                     Price = 5000.34M,
-                    ImageLink = "https://http2.mlstatic.com/D_NQ_NP_692024-MLA53006038573_122022-O.webp",
+                    ImageLink = "https://selulen.vtexassets.com/arquivos/ids/179923/SL16202_vison_1-selu-camison-raso-pijama-regulable-enagua-puntilla-estampado.jpg?v=638104325419730000",
                     Category = "Camisones"
                 }
                 );
