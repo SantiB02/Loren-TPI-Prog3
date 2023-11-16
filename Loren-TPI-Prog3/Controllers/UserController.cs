@@ -30,6 +30,7 @@ namespace Loren_TPI_Prog3.Controllers
             {  
                 UserInfoDto userInfoDto = new UserInfoDto()
                 {
+                    Id = user.Id,
                     Name = user.Name,
                     LastName = user.LastName,
                     Email = user.Email,
