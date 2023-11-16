@@ -59,12 +59,14 @@ namespace Loren_TPI_Prog3.Services.Implementations
 
         public ErrorOr<Deleted> DeleteUser (int userId)
         {
-            User userToBeDeleted = _context.Users.FirstOrDefault(u => u.Id == userId); //el usuario a borrar va a existir en la BBDD porque el userId viene del token del usuario que inició sesión. Si inicia sesión, su usuario ya existe.
+            User userToBeDeleted = _context.Users.SingleOrDefault(u => u.Id == userId); //el usuario a borrar va a existir en la BBDD porque el userId viene del token del usuario que inició sesión. Si inicia sesión, su usuario ya existe.
             userToBeDeleted.State = false; //borrado lógico. El usuario seguirá en la BBDD pero con un state 0 (false)
             _context.Update(userToBeDeleted);
             _context.SaveChanges();
             return Result.Deleted;
         }
+
+        
 
         public ErrorOr<List<User>> GetUsersByRole(string role)
         {

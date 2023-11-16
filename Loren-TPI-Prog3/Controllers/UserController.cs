@@ -20,15 +20,21 @@ namespace Loren_TPI_Prog3.Controllers
             _userService = userService;
         }
 
-        [HttpGet("{userEmail}")]
-        public IActionResult GetUserInfo([FromRoute] string userEmail)
+        [HttpGet]
+        public IActionResult GetUserInfo()
         {
-            User? user = _userService.GetUserByEmail(userEmail);
-            if (user != null)
-            {
+            string loggedUserEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            User? user = _userService.GetUserByEmail(loggedUserEmail);
+
+            if (user != null && user.State)
+            {  
                 UserInfoDto userInfoDto = new UserInfoDto()
                 {
                     Name = user.Name,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Password = user.Password,
+                    Address = user.Address,
                     UserType = user.UserType
                 };
                 return Ok(userInfoDto);
