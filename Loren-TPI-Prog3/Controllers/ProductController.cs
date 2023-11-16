@@ -26,10 +26,10 @@ namespace Loren_TPI_Prog3.Controllers
         {
             return Ok(_productService.GetProducts().Value);
         }
-        [HttpGet("{id}")]
-        public IActionResult GetProductById(Guid id)
+        [HttpGet("{productId}")]
+        public IActionResult GetProductById(int productId)
         {
-            return Ok(_productService.GetProduct(id).Value);
+            return Ok(_productService.GetProduct(productId).Value);
         }
 
         [Authorize]
@@ -74,6 +74,7 @@ namespace Loren_TPI_Prog3.Controllers
 
                 Product productUpdate = new Product()
                 {
+                    Id = productId,
                     Name = product.Name,
                     Description = product.Description,
                     Price = product.Price,

@@ -27,7 +27,7 @@ namespace Loren_TPI_Prog3.Controllers
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             if (role == "Admin" || role == "SuperAdmin")
             {
-                return Ok(_saleOrderService.GetSaleOrdersByClient(clientId));
+                return Ok(_saleOrderService.GetSaleOrdersByClient(clientId).Value);
             }
             return Forbid();
         }
@@ -38,7 +38,7 @@ namespace Loren_TPI_Prog3.Controllers
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             if (role == "Admin" || role == "SuperAdmin")
             {
-                return Ok(_saleOrderService.GetSaleOrders());
+                return Ok(_saleOrderService.GetSaleOrders().Value);
             }
             return Forbid();
         }

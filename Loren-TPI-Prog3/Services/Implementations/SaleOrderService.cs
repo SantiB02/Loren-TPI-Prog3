@@ -5,6 +5,7 @@ using Loren_TPI_Prog3.Data.Entities.Products;
 using Loren_TPI_Prog3.Data.Models;
 using Loren_TPI_Prog3.ServiceErrors;
 using Loren_TPI_Prog3.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Loren_TPI_Prog3.Services.Implementations
 {
@@ -18,12 +19,12 @@ namespace Loren_TPI_Prog3.Services.Implementations
 
         public ErrorOr<List<SaleOrder>> GetSaleOrdersByClient(int clientId)
         {
-            return _context.SaleOrders.Where(so => so.ClientId == clientId).ToList();
+            return _context.SaleOrders.Include(so => so.Client).Where(so => so.ClientId == clientId).ToList();
         }
 
         public ErrorOr<List<SaleOrder>> GetSaleOrders()
         {
-            return _context.SaleOrders.ToList();
+            return _context.SaleOrders.Include(so => so.SaleOrderLines).ThenInclude(sol => sol.Product).Include(so => so.Client).ToList();
         }
 
         public ErrorOr<decimal> CalculateLineTotal(int productId, int quantityOrdered)
@@ -38,7 +39,9 @@ namespace Loren_TPI_Prog3.Services.Implementations
             decimal saleOrderTotal = 0;
             foreach (SaleOrderLineCreateDto line in saleOrderLines)
             {
-                saleOrderTotal += line.Total;
+                Product product = _context.Products.SingleOrDefault(p => p.Id == line.ProductId);
+                decimal lineTotal = product.Price * line.QuantityOrdered;
+                saleOrderTotal += lineTotal;
             }
             return saleOrderTotal;
         }
