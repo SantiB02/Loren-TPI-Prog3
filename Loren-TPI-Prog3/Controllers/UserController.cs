@@ -20,7 +20,7 @@ namespace Loren_TPI_Prog3.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("UserInfo/")]
         public IActionResult GetUserInfo()
         {
             string loggedUserEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
