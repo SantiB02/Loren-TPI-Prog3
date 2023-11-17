@@ -25,7 +25,7 @@ namespace Loren_TPI_Prog3.Controllers
         public IActionResult GetSaleOrdersByClient([FromRoute] int clientId)
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin" || role == "SuperAdmin")
+            if (role == "Admin" || role == "SuperAdmin" || role == "Client")
             {
                 return Ok(_saleOrderService.GetSaleOrdersByClient(clientId).Value);
             }
@@ -36,7 +36,7 @@ namespace Loren_TPI_Prog3.Controllers
         public IActionResult GetSaleOrders()
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin" || role == "SuperAdmin" || role == "Client")
+            if (role == "Admin" || role == "SuperAdmin")
             {
                 return Ok(_saleOrderService.GetSaleOrders().Value);
             }
