@@ -74,8 +74,9 @@ namespace Loren_TPI_Prog3.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Code")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -113,12 +114,12 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 1,
                             Category = "Corpiños",
-                            Code = new Guid("2e18c0bd-df06-4f4d-8969-40f18ab6e6f2"),
+                            Code = "86a82f45-0b59-4a91-8a55-8310231d2145",
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Corpiño push-up de suave textura y excelente calidad",
                             Discount = 0m,
                             ImageLink = "https://http2.mlstatic.com/D_NQ_NP_692024-MLA53006038573_122022-O.webp",
-                            LastModifiedDate = new DateTime(2023, 11, 21, 1, 13, 0, 470, DateTimeKind.Local).AddTicks(4532),
+                            LastModifiedDate = new DateTime(2023, 11, 21, 3, 47, 35, 645, DateTimeKind.Local).AddTicks(6278),
                             Name = "Corpiño",
                             Price = 12000.34m,
                             State = true
@@ -127,12 +128,12 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 2,
                             Category = "Mallas",
-                            Code = new Guid("85534f23-5160-4ba2-b9b1-29fbba1f90c8"),
+                            Code = "c0a10729-935c-4b64-a759-8d41e5d7d17f",
                             CreationDate = new DateTime(2023, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Malla de algodón",
                             Discount = 10.5m,
                             ImageLink = "https://http2.mlstatic.com/D_NQ_NP_674011-MLA52236140541_112022-O.webp",
-                            LastModifiedDate = new DateTime(2023, 11, 21, 1, 13, 0, 470, DateTimeKind.Local).AddTicks(4578),
+                            LastModifiedDate = new DateTime(2023, 11, 21, 3, 47, 35, 645, DateTimeKind.Local).AddTicks(6336),
                             Name = "Malla",
                             Price = 9000.84m,
                             State = true
@@ -141,12 +142,12 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 3,
                             Category = "Camisones",
-                            Code = new Guid("9c549303-9724-494f-ba88-b48b9b1724a2"),
+                            Code = "5d38a43d-b7dc-4c37-af67-ed67dec9fa69",
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Camisón de seda confeccionado con un material suave y lujoso",
                             Discount = 0m,
                             ImageLink = "https://selulen.vtexassets.com/arquivos/ids/179923/SL16202_vison_1-selu-camison-raso-pijama-regulable-enagua-puntilla-estampado.jpg?v=638104325419730000",
-                            LastModifiedDate = new DateTime(2023, 11, 21, 1, 13, 0, 470, DateTimeKind.Local).AddTicks(4582),
+                            LastModifiedDate = new DateTime(2023, 11, 21, 3, 47, 35, 645, DateTimeKind.Local).AddTicks(6341),
                             Name = "Camisón",
                             Price = 5000.34m,
                             State = true
@@ -264,8 +265,9 @@ namespace Loren_TPI_Prog3.Migrations
                     b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("OrderCode")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("OrderCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -288,7 +290,7 @@ namespace Loren_TPI_Prog3.Migrations
                             Id = 1,
                             ClientId = 1,
                             Completed = false,
-                            OrderCode = new Guid("989ef065-ac39-49f4-8066-a994d2149cc5"),
+                            OrderCode = "f3077694-88c7-4904-b7cc-79c8211e17c5",
                             OrderDate = new DateTime(2023, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 0,
                             State = true
@@ -298,7 +300,7 @@ namespace Loren_TPI_Prog3.Migrations
                             Id = 2,
                             ClientId = 1,
                             Completed = false,
-                            OrderCode = new Guid("b026d6b6-16a8-4c9e-b02e-c96ddf8c4db0"),
+                            OrderCode = "4de94d25-6ac4-45ea-b57a-77aa63d0d3ba",
                             OrderDate = new DateTime(2023, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 1,
                             State = true

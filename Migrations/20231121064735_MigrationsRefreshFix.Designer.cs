@@ -3,6 +3,7 @@ using System;
 using Loren_TPI_Prog3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -11,27 +12,33 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loren_TPI_Prog3.Migrations
 {
     [DbContext(typeof(LorenContext))]
-    [Migration("20231114144928_SizeColorChanges")]
-    partial class SizeColorChanges
+    [Migration("20231121064735_MigrationsRefreshFix")]
+    partial class MigrationsRefreshFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Loren_TPI_Prog3.Data.Entities.Products.Color", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ColorCode")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -62,30 +69,44 @@ namespace Loren_TPI_Prog3.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("Code")
-                        .HasColumnType("TEXT");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ImageLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("State")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -95,32 +116,41 @@ namespace Loren_TPI_Prog3.Migrations
                         new
                         {
                             Id = 1,
-                            Code = new Guid("27bb2cdb-8ad5-4d9b-8348-a96456a4e527"),
+                            Category = "Corpiños",
+                            Code = "86a82f45-0b59-4a91-8a55-8310231d2145",
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Corpiño push-up de suave textura y excelente calidad",
-                            LastModifiedDate = new DateTime(2023, 11, 14, 11, 49, 27, 913, DateTimeKind.Local).AddTicks(8282),
+                            Discount = 0m,
+                            ImageLink = "https://http2.mlstatic.com/D_NQ_NP_692024-MLA53006038573_122022-O.webp",
+                            LastModifiedDate = new DateTime(2023, 11, 21, 3, 47, 35, 645, DateTimeKind.Local).AddTicks(6278),
                             Name = "Corpiño",
-                            Price = 5000.34m,
+                            Price = 12000.34m,
                             State = true
                         },
                         new
                         {
                             Id = 2,
-                            Code = new Guid("dadcf011-d66d-40fd-96ed-0eab4e072049"),
+                            Category = "Mallas",
+                            Code = "c0a10729-935c-4b64-a759-8d41e5d7d17f",
                             CreationDate = new DateTime(2023, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Malla de algodón",
-                            LastModifiedDate = new DateTime(2023, 11, 14, 11, 49, 27, 913, DateTimeKind.Local).AddTicks(8444),
+                            Discount = 10.5m,
+                            ImageLink = "https://http2.mlstatic.com/D_NQ_NP_674011-MLA52236140541_112022-O.webp",
+                            LastModifiedDate = new DateTime(2023, 11, 21, 3, 47, 35, 645, DateTimeKind.Local).AddTicks(6336),
                             Name = "Malla",
-                            Price = 5000.34m,
+                            Price = 9000.84m,
                             State = true
                         },
                         new
                         {
                             Id = 3,
-                            Code = new Guid("288fbb32-6206-4b01-a7de-2a971004aae1"),
+                            Category = "Camisones",
+                            Code = "5d38a43d-b7dc-4c37-af67-ed67dec9fa69",
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Camisón de seda confeccionado con un material suave y lujoso",
-                            LastModifiedDate = new DateTime(2023, 11, 14, 11, 49, 27, 913, DateTimeKind.Local).AddTicks(8448),
+                            Discount = 0m,
+                            ImageLink = "https://selulen.vtexassets.com/arquivos/ids/179923/SL16202_vison_1-selu-camison-raso-pijama-regulable-enagua-puntilla-estampado.jpg?v=638104325419730000",
+                            LastModifiedDate = new DateTime(2023, 11, 21, 3, 47, 35, 645, DateTimeKind.Local).AddTicks(6341),
                             Name = "Camisón",
                             Price = 5000.34m,
                             State = true
@@ -131,19 +161,21 @@ namespace Loren_TPI_Prog3.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ColorId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("SizeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("Stock")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -186,14 +218,16 @@ namespace Loren_TPI_Prog3.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SizeCode")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -224,22 +258,28 @@ namespace Loren_TPI_Prog3.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ClientId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("OrderCode")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("OrderCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PaymentMethod")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("State")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -252,19 +292,21 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 1,
                             ClientId = 1,
-                            OrderCode = new Guid("e144963e-2797-4693-a13e-352a5e823333"),
+                            Completed = false,
+                            OrderCode = "f3077694-88c7-4904-b7cc-79c8211e17c5",
                             OrderDate = new DateTime(2023, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 0,
-                            TotalPrice = 15000.34m
+                            State = true
                         },
                         new
                         {
                             Id = 2,
                             ClientId = 1,
-                            OrderCode = new Guid("58c5d47b-25a5-4000-a046-d0c20f648dd7"),
+                            Completed = false,
+                            OrderCode = "4de94d25-6ac4-45ea-b57a-77aa63d0d3ba",
                             OrderDate = new DateTime(2023, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 1,
-                            TotalPrice = 38000.95m
+                            State = true
                         });
                 });
 
@@ -272,19 +314,21 @@ namespace Loren_TPI_Prog3.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("QuantityOrdered")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("SaleOrderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -300,6 +344,22 @@ namespace Loren_TPI_Prog3.Migrations
                             Id = 1,
                             ProductId = 1,
                             QuantityOrdered = 2,
+                            SaleOrderId = 1,
+                            Total = 0m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProductId = 2,
+                            QuantityOrdered = 1,
+                            SaleOrderId = 1,
+                            Total = 0m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ProductId = 3,
+                            QuantityOrdered = 3,
                             SaleOrderId = 2,
                             Total = 0m
                         });
@@ -309,34 +369,39 @@ namespace Loren_TPI_Prog3.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("State")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserType")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -371,24 +436,20 @@ namespace Loren_TPI_Prog3.Migrations
                 {
                     b.HasBaseType("Loren_TPI_Prog3.Data.Entities.User");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.HasDiscriminator().HasValue("Client");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            Address = "Montevideo 1150 7B",
                             Email = "leocabral@gmail.com",
                             LastName = "Cabral",
                             Name = "Leandro",
                             Password = "leo123456",
                             State = true,
                             UserName = "lean94",
-                            UserType = "Client",
-                            Address = "Montevideo 1150 7B"
+                            UserType = "Client"
                         });
                 });
 

@@ -63,7 +63,7 @@ namespace Loren_TPI_Prog3.Data
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
-                    Code = Guid.NewGuid(),
+                    Code = Guid.NewGuid().ToString(),
                     Description = "Corpiño push-up de suave textura y excelente calidad",
                     CreationDate = new DateTime(2023, 10, 3),
                     Id = 1,
@@ -74,7 +74,7 @@ namespace Loren_TPI_Prog3.Data
                 },
                 new Product
                 {
-                    Code = Guid.NewGuid(),
+                    Code = Guid.NewGuid().ToString(),
                     Description = "Malla de algodón",
                     CreationDate = new DateTime(2023, 10, 29),
                     Id = 2,
@@ -87,7 +87,7 @@ namespace Loren_TPI_Prog3.Data
                 },
                 new Product
                 {
-                    Code = Guid.NewGuid(),
+                    Code = Guid.NewGuid().ToString(),
                     Description = "Camisón de seda confeccionado con un material suave y lujoso",
                     CreationDate = new DateTime(2023, 10, 3),
                     Id = 3,
@@ -131,7 +131,7 @@ namespace Loren_TPI_Prog3.Data
                 new SaleOrder
                 {
                     Id = 1,
-                    OrderCode = Guid.NewGuid(),
+                    OrderCode = Guid.NewGuid().ToString(),
                     OrderDate = new DateTime(2023, 8, 14),
                     PaymentMethod = PaymentMethodEnum.TarjetaDeDebito,
                     //TotalPrice = 15000.34M,
@@ -140,7 +140,7 @@ namespace Loren_TPI_Prog3.Data
                 new SaleOrder
                 {
                     Id = 2,
-                    OrderCode = Guid.NewGuid(),
+                    OrderCode = Guid.NewGuid().ToString(),
                     OrderDate = new DateTime(2023, 10, 11),
                     PaymentMethod = PaymentMethodEnum.TarjetaDeCredito,
                     //TotalPrice = 38000.95M,

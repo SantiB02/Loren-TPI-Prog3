@@ -56,7 +56,7 @@ namespace Loren_TPI_Prog3.Controllers
             {
                 SaleOrder saleOrder = new SaleOrder()
                 {
-                    OrderCode = Guid.NewGuid(),
+                    OrderCode = Guid.NewGuid().ToString(),
                     SaleOrderLines = saleOrderCreateDto.SaleOrderLines.Select(lineDTO => new SaleOrderLine
                     {
                         ProductId = lineDTO.ProductId,

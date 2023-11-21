@@ -53,7 +53,7 @@ namespace Loren_TPI_Prog3.Controllers
                     Price = productCreateDto.Price,
                     CreationDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Code = Guid.NewGuid(),
+                    Code = Guid.NewGuid().ToString(),
                     Discount = productCreateDto.Discount,
                     ImageLink = productCreateDto.ImageLink,
                     Category = productCreateDto.Category

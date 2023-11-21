@@ -41,7 +41,7 @@ builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddDbContext<LorenContext>(dbContextOptions =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var connectionString = builder.Configuration.GetConnectionString("MyConnectionString");
     var dbPassword = builder.Configuration["DbPassword"];
 
     connectionString = connectionString.Replace("{DbPassword}", dbPassword);
