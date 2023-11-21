@@ -68,7 +68,7 @@ namespace Loren_TPI_Prog3.Data
                     CreationDate = new DateTime(2023, 10, 3),
                     Id = 1,
                     Name = "Corpiño",
-                    Price = 5000.34M,
+                    Price = 12000.34M,
                     ImageLink = "https://http2.mlstatic.com/D_NQ_NP_692024-MLA53006038573_122022-O.webp",
                     Category = "Corpiños"
                 },
@@ -79,7 +79,7 @@ namespace Loren_TPI_Prog3.Data
                     CreationDate = new DateTime(2023, 10, 29),
                     Id = 2,
                     Name = "Malla",
-                    Price = 5000.34M,
+                    Price = 9000.84M,
                     Discount = 10.5M,
                     ImageLink = "https://http2.mlstatic.com/D_NQ_NP_674011-MLA52236140541_112022-O.webp",
                     Category = "Mallas"
@@ -134,9 +134,8 @@ namespace Loren_TPI_Prog3.Data
                     OrderCode = Guid.NewGuid(),
                     OrderDate = new DateTime(2023, 8, 14),
                     PaymentMethod = PaymentMethodEnum.TarjetaDeDebito,
-                    TotalPrice = 15000.34M,
-                    ClientId = 1
-
+                    //TotalPrice = 15000.34M,
+                    ClientId = 1,
                 },
                 new SaleOrder
                 {
@@ -144,8 +143,9 @@ namespace Loren_TPI_Prog3.Data
                     OrderCode = Guid.NewGuid(),
                     OrderDate = new DateTime(2023, 10, 11),
                     PaymentMethod = PaymentMethodEnum.TarjetaDeCredito,
-                    TotalPrice = 38000.95M,
+                    //TotalPrice = 38000.95M,
                     ClientId = 1,
+                    //Las SaleOrderLines se crean como entidades separadas ya que es una propiedad de navegación, y luego se relaciona a la SaleOrder correspondiente seteando la propiedad de foreign key llamada "SaleOrderId"
                 }
                 );
 
@@ -155,6 +155,22 @@ namespace Loren_TPI_Prog3.Data
                     Id= 1,
                     ProductId = 1,
                     QuantityOrdered = 2,
+                    SaleOrderId = 1,
+                    //si el total tira excepción, calculamos el Total en el servicio
+                },
+                new SaleOrderLine
+                {
+                    Id = 2,
+                    ProductId = 2,
+                    QuantityOrdered = 1,
+                    SaleOrderId = 1,
+                    //si el total tira excepción, calculamos el Total en el servicio
+                },
+                new SaleOrderLine
+                {
+                    Id = 3,
+                    ProductId = 3,
+                    QuantityOrdered = 3,
                     SaleOrderId = 2,
                     //si el total tira excepción, calculamos el Total en el servicio
                 }

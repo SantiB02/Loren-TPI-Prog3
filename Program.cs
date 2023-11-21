@@ -37,7 +37,18 @@ builder.Services.AddSwaggerGen(setupAction =>
     });
 });
 
-builder.Services.AddDbContext<LorenContext>(dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["DB:ConnectionString"]));
+builder.Configuration.AddUserSecrets<Program>();
+
+builder.Services.AddDbContext<LorenContext>(dbContextOptions =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var dbPassword = builder.Configuration["DbPassword"];
+
+    connectionString = connectionString.Replace("{DbPassword}", dbPassword);
+
+    dbContextOptions.UseSqlServer(connectionString);
+});
+
 
 #region Injections
 

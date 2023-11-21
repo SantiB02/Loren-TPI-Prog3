@@ -25,7 +25,12 @@ namespace Loren_TPI_Prog3.Controllers
         public IActionResult GetSaleOrdersByClient([FromRoute] int clientId)
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin" || role == "SuperAdmin" || role == "Client")
+            int loggedUserId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value); //para el cliente
+
+            if (role == "Client")
+            {
+                return Ok(_saleOrderService.GetSaleOrdersByClient(loggedUserId).Value);
+            } else if (role == "Admin" || role == "SuperAdmin")
             {
                 return Ok(_saleOrderService.GetSaleOrdersByClient(clientId).Value);
             }
@@ -56,12 +61,12 @@ namespace Loren_TPI_Prog3.Controllers
                     {
                         ProductId = lineDTO.ProductId,
                         QuantityOrdered = lineDTO.QuantityOrdered,
-                        Total = _saleOrderService.CalculateLineTotal(lineDTO.ProductId, lineDTO.QuantityOrdered).Value,
+                        //Total = _saleOrderService.CalculateLineTotal(lineDTO.ProductId, lineDTO.QuantityOrdered).Value,
                         SaleOrderId = lineDTO.SaleOrderId
                     }).ToList(),
                     PaymentMethod = saleOrderCreateDto.PaymentMethod,
                     OrderDate = DateTime.Now,
-                    TotalPrice = _saleOrderService.CalculateSaleOrderTotal(saleOrderCreateDto.SaleOrderLines.ToList()).Value,
+                    //TotalPrice = _saleOrderService.CalculateSaleOrderTotal(saleOrderCreateDto.SaleOrderLines.ToList()).Value,
                     ClientId = saleOrderCreateDto.ClientId
                 };
                 return Ok(_saleOrderService.CreateSaleOrder(saleOrder).Value);
