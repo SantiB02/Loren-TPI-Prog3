@@ -4,6 +4,7 @@ using Loren_TPI_Prog3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loren_TPI_Prog3.Migrations
 {
     [DbContext(typeof(LorenContext))]
-    partial class LorenContextModelSnapshot : ModelSnapshot
+    [Migration("20231122075709_SimplifiedSaleOrderLine")]
+    partial class SimplifiedSaleOrderLine
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,12 +117,12 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 1,
                             Category = "Corpiños",
-                            Code = "b934046e-762b-4839-bdad-3aad039e5ce7",
+                            Code = "e9ad0c5a-3750-4259-8fef-4dfc35230982",
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Corpiño push-up de suave textura y excelente calidad",
                             Discount = 0m,
                             ImageLink = "https://http2.mlstatic.com/D_NQ_NP_692024-MLA53006038573_122022-O.webp",
-                            LastModifiedDate = new DateTime(2023, 11, 22, 16, 44, 15, 440, DateTimeKind.Local).AddTicks(8444),
+                            LastModifiedDate = new DateTime(2023, 11, 22, 4, 57, 9, 765, DateTimeKind.Local).AddTicks(1279),
                             Name = "Corpiño",
                             Price = 12000.34m,
                             State = true
@@ -128,12 +131,12 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 2,
                             Category = "Mallas",
-                            Code = "ea1250dd-1178-4b88-b68b-82a5b8c2441e",
+                            Code = "ad8a1576-c105-4094-9423-43dd154f4bf0",
                             CreationDate = new DateTime(2023, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Malla de algodón",
                             Discount = 10.5m,
                             ImageLink = "https://http2.mlstatic.com/D_NQ_NP_674011-MLA52236140541_112022-O.webp",
-                            LastModifiedDate = new DateTime(2023, 11, 22, 16, 44, 15, 440, DateTimeKind.Local).AddTicks(8501),
+                            LastModifiedDate = new DateTime(2023, 11, 22, 4, 57, 9, 765, DateTimeKind.Local).AddTicks(1335),
                             Name = "Malla",
                             Price = 9000.84m,
                             State = true
@@ -142,12 +145,12 @@ namespace Loren_TPI_Prog3.Migrations
                         {
                             Id = 3,
                             Category = "Camisones",
-                            Code = "45b20fa5-2709-48d1-b31f-3715d00ed642",
+                            Code = "8166fdb2-c2a1-4135-bcc7-1ec2f65d03e2",
                             CreationDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Camisón de seda confeccionado con un material suave y lujoso",
                             Discount = 0m,
                             ImageLink = "https://selulen.vtexassets.com/arquivos/ids/179923/SL16202_vison_1-selu-camison-raso-pijama-regulable-enagua-puntilla-estampado.jpg?v=638104325419730000",
-                            LastModifiedDate = new DateTime(2023, 11, 22, 16, 44, 15, 440, DateTimeKind.Local).AddTicks(8521),
+                            LastModifiedDate = new DateTime(2023, 11, 22, 4, 57, 9, 765, DateTimeKind.Local).AddTicks(1339),
                             Name = "Camisón",
                             Price = 5000.34m,
                             State = true
@@ -290,7 +293,7 @@ namespace Loren_TPI_Prog3.Migrations
                             Id = 1,
                             ClientId = 1,
                             Completed = false,
-                            OrderCode = "fd03262b-b014-4699-82fe-f7364d614857",
+                            OrderCode = "c426f069-dfce-4af4-9a2c-5b48b3036a13",
                             OrderDate = new DateTime(2023, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 0,
                             State = true
@@ -300,7 +303,7 @@ namespace Loren_TPI_Prog3.Migrations
                             Id = 2,
                             ClientId = 1,
                             Completed = false,
-                            OrderCode = "a479e224-ba32-44ba-8f9a-b50b3ac6e555",
+                            OrderCode = "286cbe9f-d33e-49f2-b0a8-1148d35cc5cf",
                             OrderDate = new DateTime(2023, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentMethod = 1,
                             State = true
@@ -324,6 +327,9 @@ namespace Loren_TPI_Prog3.Migrations
                     b.Property<int>("SaleOrderId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
@@ -338,21 +344,24 @@ namespace Loren_TPI_Prog3.Migrations
                             Id = 1,
                             ProductId = 1,
                             QuantityOrdered = 2,
-                            SaleOrderId = 1
+                            SaleOrderId = 1,
+                            Total = 0m
                         },
                         new
                         {
                             Id = 2,
                             ProductId = 2,
                             QuantityOrdered = 1,
-                            SaleOrderId = 1
+                            SaleOrderId = 1,
+                            Total = 0m
                         },
                         new
                         {
                             Id = 3,
                             ProductId = 3,
                             QuantityOrdered = 3,
-                            SaleOrderId = 2
+                            SaleOrderId = 2,
+                            Total = 0m
                         });
                 });
 

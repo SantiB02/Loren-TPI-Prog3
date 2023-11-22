@@ -229,7 +229,7 @@ namespace Loren_TPI_Prog3.Data
             //relación uno (orden de venta) a muchos (líneas de orden de venta)
             modelBuilder.Entity<SaleOrder>()
                 .HasMany(so => so.SaleOrderLines)
-                .WithOne(sol => sol.SaleOrder)
+                .WithOne()
                 .HasForeignKey(sol => sol.SaleOrderId);
 
             //relación muchos (líneas de orden de venta) a uno (producto)

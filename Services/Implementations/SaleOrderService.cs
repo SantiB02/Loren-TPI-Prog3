@@ -19,7 +19,7 @@ namespace Loren_TPI_Prog3.Services.Implementations
 
         public ErrorOr<List<SaleOrder>> GetSaleOrdersByClient(int clientId)
         {
-            return _context.SaleOrders.Include(so => so.Client).Where(so => so.ClientId == clientId).ToList();
+            return _context.SaleOrders.Include(so => so.SaleOrderLines).ThenInclude(sol => sol.Product).Where(so => so.ClientId == clientId).ToList();
         }
 
         public ErrorOr<List<SaleOrder>> GetSaleOrders()
