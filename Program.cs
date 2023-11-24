@@ -37,27 +37,27 @@ builder.Services.AddSwaggerGen(setupAction =>
     });
 });
 
-builder.Configuration.AddUserSecrets<Program>();
+builder.Configuration.AddUserSecrets<Program>(); //indicamos al Program que use los user-secrets (por el repositorio público)
 
 builder.Services.AddDbContext<LorenContext>(dbContextOptions =>
 {
     var connectionString = builder.Configuration.GetConnectionString("MyConnectionString");
     var dbPassword = builder.Configuration["DbPassword"];
 
-    connectionString = connectionString.Replace("{DbPassword}", dbPassword);
+    connectionString = connectionString.Replace("{DbPassword}", dbPassword); //uso de un user-secret para no publicar la contraseña de acceso SQL Server al repositorio público de GitHub
 
-    dbContextOptions.UseSqlServer(connectionString);
+    dbContextOptions.UseSqlServer(connectionString); //cambiamos el motor de la base de datos de SQLite a SQL Server para poder deployar el back-end en Azure (no admite SQLite nativamente)
 });
 
 
 #region Injections
 
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserService, UserService>(); //Scoped: se instancia el servicio por cada solicitud HTTP
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISaleOrderService, SaleOrderService>();
 #endregion
 
-builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntenticación que tenemos que elegir después en PostMan para pasarle el token
+builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de autenticación que tenemos que elegir después en PostMan para pasarle el token
     .AddJwtBearer(options => //Acá definimos la configuración de la autenticación. le decimos qué cosas queremos comprobar. La fecha de expiración se valida por defecto.
     {
         options.TokenValidationParameters = new()
@@ -71,7 +71,7 @@ builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntentica
         };
     }
 );
-builder.Services.AddCors(options =>
+builder.Services.AddCors(options => //habilitamos las solicitudes Cross-Origin para deployar correctamente el back-end en Azure
 {
     options.AddPolicy("AllowAll", builder =>
     {
