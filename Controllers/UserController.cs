@@ -61,17 +61,23 @@ namespace Loren_TPI_Prog3.Controllers
         [HttpPost]
         public IActionResult CreateClient([FromBody] ClientPostDto clientPostDto) //sería la registración de un nuevo cliente
         {
-            Client client = new Client()
+            if (!_userService.CheckIfUserExists(clientPostDto.Email))
             {
-                Email = clientPostDto.Email,
-                Name = clientPostDto.Name,
-                LastName = clientPostDto.LastName,
-                Password = clientPostDto.Password,
-                UserName = clientPostDto.UserName,
-                Address = clientPostDto.Address
-            };
-            int id = _userService.CreateUser(client).Value;
-            return Ok(id);
+                Client client = new Client()
+                {
+                    Email = clientPostDto.Email,
+                    Name = clientPostDto.Name,
+                    LastName = clientPostDto.LastName,
+                    Password = clientPostDto.Password,
+                    UserName = clientPostDto.UserName,
+                    Address = clientPostDto.Address
+                };
+                int id = _userService.CreateUser(client).Value;
+                return Ok(id);
+            } else
+            {
+                return BadRequest("Client already exists");
+            }
         }
 
         [HttpPost("admin/")]

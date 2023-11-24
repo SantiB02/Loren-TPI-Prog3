@@ -27,25 +27,6 @@ namespace Loren_TPI_Prog3.Services.Implementations
             return _context.SaleOrders.Include(so => so.SaleOrderLines).ThenInclude(sol => sol.Product).Include(so => so.Client).ToList();
         }
 
-        public ErrorOr<decimal> CalculateLineTotal(int productId, int quantityOrdered)
-        {
-            Product product = _context.Products.FirstOrDefault(p => p.Id == productId);
-            decimal lineTotal = product.Price * quantityOrdered;
-            return lineTotal;
-        }
-
-        public ErrorOr<decimal> CalculateSaleOrderTotal(List<SaleOrderLineCreateDto> saleOrderLines)
-        {
-            decimal saleOrderTotal = 0;
-            foreach (SaleOrderLineCreateDto line in saleOrderLines)
-            {
-                Product product = _context.Products.SingleOrDefault(p => p.Id == line.ProductId);
-                decimal lineTotal = product.Price * line.QuantityOrdered;
-                saleOrderTotal += lineTotal;
-            }
-            return saleOrderTotal;
-        }
-
         public ErrorOr<int> CreateSaleOrder(SaleOrder saleOrder)
         {
             _context.Add(saleOrder);

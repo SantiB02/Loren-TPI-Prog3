@@ -8,8 +8,6 @@ namespace Loren_TPI_Prog3.Services.Interfaces
     {
         public ErrorOr<List<SaleOrder>> GetSaleOrdersByClient(int clientId);
         public ErrorOr<List<SaleOrder>> GetSaleOrders();
-        public ErrorOr<decimal> CalculateLineTotal(int productId, int quantityOrdered);
-        public ErrorOr<decimal> CalculateSaleOrderTotal(List<SaleOrderLineCreateDto> saleOrderLines);
         public ErrorOr<int> CreateSaleOrder(SaleOrder saleOrder);
         public ErrorOr<Updated> CompleteSaleOrder(int saleOrderId);
         public ErrorOr<Deleted> DeleteSaleOrder(int saleOrderId);

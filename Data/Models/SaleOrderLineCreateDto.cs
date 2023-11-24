@@ -7,6 +7,5 @@ namespace Loren_TPI_Prog3.Data.Models
     {
         public int ProductId { get; set; }
         public int QuantityOrdered { get; set; }
-        public int SaleOrderId { get; set; }
     }
 }

@@ -20,6 +20,11 @@ namespace Loren_TPI_Prog3.Services.Implementations
             return _context.Users.SingleOrDefault(u => u.Email == email);
         }
 
+        public bool CheckIfUserExists(string userEmail)
+        {
+            return _context.Users.Any(u => u.Email == userEmail);
+        }
+
         public BaseResponse ValidateUser (string email, string password)
         {
             BaseResponse response = new();

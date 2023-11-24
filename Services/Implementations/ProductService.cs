@@ -37,7 +37,12 @@ namespace Loren_TPI_Prog3.Services.Implementations
 
         public ErrorOr<Product> GetProduct(int productId)
         {
-            Product? product = _context.Products.SingleOrDefault(p => p.Id == productId);
+            Product? product = _context.Products
+                .Include(p => p.Variants)
+                    .ThenInclude(v => v.Color)
+                .Include(p => p.Variants)
+                    .ThenInclude(v => v.Size)
+                    .SingleOrDefault(p => p.Id == productId);
             if (product != null)
             {
                 return product;
@@ -47,9 +52,11 @@ namespace Loren_TPI_Prog3.Services.Implementations
 
         public ErrorOr<Updated> UpdateProduct(int productId, Product product)
         {
-            if (_context.Products.SingleOrDefault(p => p.Id == productId) != null)
+            Product? productToUpdate = _context.Products.SingleOrDefault(p => p.Id == productId);
+            if (productToUpdate != null)
             {
                 _context.ChangeTracker.Clear(); //NO TOCAR
+                product.Code = productToUpdate.Code;
                 _context.Products.Update(product);
                 _context.SaveChanges();
                 return Result.Updated;

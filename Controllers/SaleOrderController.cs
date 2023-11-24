@@ -62,7 +62,6 @@ namespace Loren_TPI_Prog3.Controllers
                         ProductId = lineDTO.ProductId,
                         QuantityOrdered = lineDTO.QuantityOrdered,
                         //Total = _saleOrderService.CalculateLineTotal(lineDTO.ProductId, lineDTO.QuantityOrdered).Value,
-                        SaleOrderId = lineDTO.SaleOrderId
                     }).ToList(),
                     PaymentMethod = saleOrderCreateDto.PaymentMethod,
                     OrderDate = DateTime.Now,
@@ -74,8 +73,8 @@ namespace Loren_TPI_Prog3.Controllers
             return Forbid();
         }
 
-        [HttpPut]
-        public IActionResult CompleteSaleOrder([FromBody] int saleOrderId)
+        [HttpPut("{saleOrderId}")]
+        public IActionResult CompleteSaleOrder([FromRoute] int saleOrderId)
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             if (role == "Admin" || role == "SuperAdmin")
@@ -95,8 +94,8 @@ namespace Loren_TPI_Prog3.Controllers
             return Forbid();
         }
 
-        [HttpDelete]
-        public IActionResult DeleteSaleOrder([FromBody] int saleOrderId)
+        [HttpDelete("{saleOrderId}")]
+        public IActionResult DeleteSaleOrder([FromRoute] int saleOrderId)
         {
             string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             if (role == "Admin" || role == "SuperAdmin")
